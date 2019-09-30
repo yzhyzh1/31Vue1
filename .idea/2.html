@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .display{display: none}
+    </style>
+</head>
+<body>
+<table border="1" id="app">
+    <tr>
+        <th>商品序号</th>
+        <th>商品编号</th>
+        <th>商品名称</th>
+        <th>商品数量</th>
+        <th>商品单价</th>
+        <th>移出</th>
+    </tr>
+    <tr  v-for="(item,index) in ary" :key="index">
+        <td>{{item.number1}}</td>
+        <td>{{item.number2}}</td>
+        <td>{{item.name}}</td>
+        <td><button @click="doClick(index)">-</button><span>{{item.number}}</span><button @click="doClick2(index)">+</button></td>
+        <td>{{item.number3}}</td>
+        <td><button @click="doClick3(index)">移除</button></td>
+    </tr>
+    <tr><td colspan="6">总和：{{sum}}元</td></tr>
+</table>
+
+
+<script>
+ new Vue({
+     el:"#app",
+     data(){
+         return{
+             ary:[
+                 {number1:'1',number2:'0001',number:'1',name:'iphoneX',number3:8899},
+                 {number1:'2',number2:'0002',number:'1',name:'华为mate30',number3:4000},
+                 {number1:'3',number2:'0003',number:'1',name:'小米RedmiBook',number3:3599},
+                 {number1:'4',number2:'0004',number:'1',name:'华为畅享9e',number3:4999}],
+         }
+     },
+     methods: {
+         doClick(index) {
+             if (this.ary[index].number>1)
+             this.ary[index].number--;
+         },
+         doClick2(index) {
+             this.ary[index].number++;
+
+         },
+         doClick3(index) {
+                 this.ary.splice(index,1)
+
+
+         }
+
+     },
+     computed:{
+         sum(){
+             var sum=0;
+             this.ary.forEach(function(item,index){
+                 sum+=item.number*item.number3;
+             })
+             return sum;
+         }
+
+     }
+
+ })
+</script>
+</body>
+</html>

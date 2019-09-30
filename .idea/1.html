@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .border-gray{border:1px solid #000}
+        #app{ width:500px;margin: 0 auto}
+    </style>
+</head>
+<body>
+<div id="app">
+    <img  :src="img" style="width: 250px;">
+    <ul style="display: inline-block;position: absolute">
+
+        颜色选择
+        <li style="list-style-type: none; height: 50px" v-for="(item,index) in ary" :key="index" @click="doClick(index)" :class="{'border-gray':current==index}" >
+            <img :src="item.url" width="30" height="40"  style="float: left;">
+            <p style="float: left">{{item.name}}</p>
+        </li>
+    </ul>
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        data(){
+            return{
+                ary:[
+                    {name:'粉色RGB版',url:'https://img.alicdn.com/imgextra/i4/690218342/O1CN01VmU6uP2BUgVNzPomm_!!690218342.jpg_430x430q90.jpg'},
+                    {name:'白色RGB版',url:'https://img.alicdn.com/imgextra/i3/690218342/O1CN01JS7Gd02BUgTAlPQ1P_!!690218342.jpg_430x430q90.jpg'},
+                    {name:'黑色震动版',url:'https://img.alicdn.com/imgextra/i2/690218342/O1CN01p9vaIW2BUgWhhblCs_!!690218342.jpg_430x430q90.jpg'},
+                    {name:'迷彩蓝光版',url:'https://img.alicdn.com/imgextra/TB1mCY8zntYBeNjy1XdL6RXyVXa_430x430q90.jpg'}],
+                current:-1,
+                img:"https://img.alicdn.com/imgextra/i4/690218342/O1CN01VmU6uP2BUgVNzPomm_!!690218342.jpg_430x430q90.jpg"
+            }
+        },
+        methods:{
+            doClick(index){
+                this.current=index;
+                this.img=this.ary[index].url
+
+
+            }
+        }
+    })
+</script>
+</body>
+</html>
